@@ -265,3 +265,4 @@ namespace Unity.MLAgents.Analytics
         }
     }
 }
+#endif // MLA_UNITY_ANALYTICS

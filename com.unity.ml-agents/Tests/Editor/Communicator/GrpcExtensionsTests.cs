@@ -197,5 +197,6 @@ namespace Unity.MLAgents.Tests
             Assert.AreEqual(RewardSignals.Extrinsic | RewardSignals.Curiosity, trainingBehavInitEvent.RewardSignalFlags);
             Assert.AreEqual(TrainingFeatures.Recurrent | TrainingFeatures.SelfPlay, trainingBehavInitEvent.TrainingFeatureFlags);
         }
+#endif // MLA_UNITY_ANALYTICS
     }
 }

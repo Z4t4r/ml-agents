@@ -68,7 +68,6 @@ namespace Unity.MLAgents.Analytics
             {
                 s_EventRegistered = true;
             }
-#elif MLA_UNITY_ANALYTICS_MODULE_ENABLED
             AnalyticsResult result = AnalyticsResult.UnsupportedPlatform;
             if (result == AnalyticsResult.Ok)
             {
@@ -291,3 +290,4 @@ namespace Unity.MLAgents.Analytics
         }
     }
 }
+#endif // MLA_UNITY_ANALYTICS
