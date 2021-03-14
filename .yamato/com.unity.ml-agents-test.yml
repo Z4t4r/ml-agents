@@ -162,8 +162,8 @@ test_{{ package.name }}_{{ platform.name }}_trunk:
   {% endfor %}
 
   {% for optional_dep in optional_deps %}
-OptionalDependencyTestsLinux {{ optional_dep.name }}:
-    name : OptionalDependenciesTests {{ opetional_dep.name }}
+OptionalDependencyTestsLinux_{{ optional_dep.name }}:
+    name : OptionalDependenciesTests_{{ opetional_dep.name }}
     agent:
         type: Unity::VM
         image: package-ci/ubuntu:stable
