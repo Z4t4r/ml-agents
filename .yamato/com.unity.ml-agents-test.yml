@@ -163,7 +163,7 @@ test_{{ package.name }}_{{ platform.name }}_trunk:
 
   {% for optional_dep in optional_deps %}
 OptionalDependencyTestsLinux_{{ optional_dep.name }}:
-    name : OptionalDependenciesTests_{{ opetional_dep.name }}
+    name : OptionalDependenciesTests_{{ optional_dep.name }}
     agent:
         type: Unity::VM
         image: package-ci/ubuntu:stable
@@ -172,7 +172,7 @@ OptionalDependencyTestsLinux_{{ optional_dep.name }}:
         - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
         - unity-downloader-cli -u trunk -c editor --wait --fast
         - npm install upm-ci-utils@stable -g --registry https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-npm
-        - upm-ci project test -u {{ optional_dep.version }} --type package-tests --project-path ./{{ opetional_dep.project }} --package-filter com.unity.ml-agents
+        - upm-ci project test -u {{ optional_dep.version }} --type package-tests --project-path ./{{ optional_dep.project }} --package-filter com.unity.ml-agents
     artifacts:
         logs:
             paths:
