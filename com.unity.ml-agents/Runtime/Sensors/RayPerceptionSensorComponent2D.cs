@@ -1,3 +1,4 @@
+#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
 using UnityEngine;
 
 namespace Unity.MLAgents.Sensors
@@ -24,3 +25,4 @@ namespace Unity.MLAgents.Sensors
         }
     }
 }
+#endif // MLA_UNITY_PHYSICS2D_MODULE

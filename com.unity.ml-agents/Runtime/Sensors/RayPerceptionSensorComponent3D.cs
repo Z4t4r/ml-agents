@@ -1,3 +1,4 @@
+#if MLA_UNITY_PHYSICS_MODULE_ENABLED
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -56,3 +57,4 @@ namespace Unity.MLAgents.Sensors
         }
     }
 }
+#endif // MLA_UNITY_PHYSICS_MODULE

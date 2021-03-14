@@ -71,6 +71,7 @@ namespace Unity.MLAgents.Editor
         }
     }
 
+#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
     [CustomEditor(typeof(RayPerceptionSensorComponent2D))]
     [CanEditMultipleObjects]
     internal class RayPerceptionSensorComponent2DEditor : RayPerceptionSensorComponentBaseEditor
@@ -80,7 +81,9 @@ namespace Unity.MLAgents.Editor
             OnRayPerceptionInspectorGUI(false);
         }
     }
+#endif
 
+#if MLA_UNITY_PHYSICS_MODULE_ENABLED
     [CustomEditor(typeof(RayPerceptionSensorComponent3D))]
     [CanEditMultipleObjects]
     internal class RayPerceptionSensorComponent3DEditor : RayPerceptionSensorComponentBaseEditor
@@ -90,4 +93,5 @@ namespace Unity.MLAgents.Editor
             OnRayPerceptionInspectorGUI(true);
         }
     }
+#endif
 }

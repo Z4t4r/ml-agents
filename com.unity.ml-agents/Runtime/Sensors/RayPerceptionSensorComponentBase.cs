@@ -97,9 +97,17 @@ namespace Unity.MLAgents.Sensors
             set { m_RayLength = value; UpdateSensor(); }
         }
 
+#if MLA_UNITY_PHYSICS_MODULE_ENABLED
+        const int k_PhysicsDefaultLayers = Physics.DefaultRaycastLayers;
+#elif MLA_UNITY_PHYSICS2D_MODULE_ENABLED
+        const int k_PhysicsDefaultLayers = Physics2D.DefaultRaycastLayers;
+#else
+        // The value of the default layers.
+        const int k_PhysicsDefaultLayers = -5;
+#endif
         [HideInInspector, SerializeField, FormerlySerializedAs("rayLayerMask")]
         [Tooltip("Controls which layers the rays can hit.")]
-        LayerMask m_RayLayerMask = Physics.DefaultRaycastLayers;
+        LayerMask m_RayLayerMask = k_PhysicsDefaultLayers;
 
         /// <summary>
         /// Controls which layers the rays can hit.

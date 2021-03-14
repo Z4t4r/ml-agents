@@ -24,6 +24,7 @@ namespace Unity.MLAgents.Tests
 
     public class RayPerception3DTests
     {
+#if MLA_UNITY_PHYSICS_MODULE_ENABLED
         // Use built-in tags
         const string k_CubeTag = "Player";
         const string k_SphereTag = "Respawn";
@@ -71,6 +72,7 @@ namespace Unity.MLAgents.Tests
             sphere3.transform.position = new Vector3(0, 0, -10);
             sphere3.tag = k_SphereTag;
             sphere3.name = "sphere3";
+
 
             Physics.SyncTransforms();
         }
@@ -402,5 +404,6 @@ namespace Unity.MLAgents.Tests
                 Assert.AreEqual(-1, castOutput.RayOutputs[0].HitTagIndex);
             }
         }
+#endif
     }
 }
