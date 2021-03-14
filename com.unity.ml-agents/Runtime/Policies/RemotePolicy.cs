@@ -17,7 +17,7 @@ namespace Unity.MLAgents.Policies
         string m_FullyQualifiedBehaviorName;
         ActionSpec m_ActionSpec;
         ActionBuffers m_LastActionBuffer;
-#if MLA_UNITY_ANALYTICS
+#if MLA_UNITY_ANALYTICS_MODULE_ENABLED
         private bool m_AnalyticsSent = false;
 #endif
 
@@ -44,7 +44,7 @@ namespace Unity.MLAgents.Policies
         /// <inheritdoc />
         public void RequestDecision(AgentInfo info, List<ISensor> sensors)
         {
-#if MLA_UNITY_ANALYTICS
+#if MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (!m_AnalyticsSent)
             {
                 m_AnalyticsSent = true;
