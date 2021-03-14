@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.ml-agents": "file:../../com.unity.ml-agents",
+    "com.unity.ml-agents": "file:../../../com.unity.ml-agents",
     "com.unity.test-framework": "1.1.22",
     "com.unity.modules.imageconversion": "1.0.0",
     "com.unity.modules.imgui": "1.0.0",
