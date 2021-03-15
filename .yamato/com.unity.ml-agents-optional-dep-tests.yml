@@ -12,7 +12,7 @@ optional_deps:
 
   {% for optional_dep in optional_deps %}
 TestOptionalDependencyLinux_{{ optional_dep.name }}:
-    name : LinuxOptionalDependenciesTests
+    name : LinuxOptionalDependenciesTests_{{ optional_dep.name }}
     agent:
         type: Unity::VM
         image: package-ci/ubuntu:stable
@@ -30,16 +30,16 @@ TestOptionalDependencyLinux_{{ optional_dep.name }}:
             unity-config project add testable com.unity.ml-agents
             unity-config project add dependency com.unity.modules.imageconversion@1.0.0
             unity-config project add dependency com.unity.modules.jsonserialize@1.0.0
-      {% unless optional_dep.name == "Physics" %}
-        unity-config project add dependency com.unity.modules.physics@1.0.0
-        {% endunless %}
-        {% unless optional_dep.name == "Physics2D" %}
-        unity-config project add dependency com.unity.modules.physics2d@1.0.0
-        {% endunless %}
-        {% unless optional_dep.name == "Analytics" %}
-        unity-config project add dependency com.unity.modules.unityanalytics@1.0.0
-        {% endunless %}
-        upm-ci project test -u {{ optional_dep.version }} --type project-tests --project-path opt-deps-test --package-filter com.unity.ml-agents
+            {% unless optional_dep.name == "Physics" %}
+            unity-config project add dependency com.unity.modules.physics@1.0.0
+            {% endunless %}
+            {% unless optional_dep.name == "Physics2D" %}
+            unity-config project add dependency com.unity.modules.physics2d@1.0.0
+            {% endunless %}
+            {% unless optional_dep.name == "Analytics" %}
+            unity-config project add dependency com.unity.modules.unityanalytics@1.0.0
+            {% endunless %}
+            upm-ci project test -u {{ optional_dep.version }} --type project-tests --project-path opt-deps-test --package-filter com.unity.ml-agents
     artifacts:
         logs:
             paths:
