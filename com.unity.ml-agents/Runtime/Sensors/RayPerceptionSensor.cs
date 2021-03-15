@@ -1,3 +1,11 @@
+#if MLA_UNITY_PHYSICS_MODULE || !UNITY_2019_4_OR_NEWER
+#define MLA_UNITY_PHYSICS_MODULE_ENABLED
+#endif
+
+#if MLA_UNITY_PHYSICS2D_MODULE || !UNITY_2019_4_OR_NEWER
+#define MLA_UNITY_PHYSICS2D_MODULE_ENABLED
+#endif
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
