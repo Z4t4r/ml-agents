@@ -56,29 +56,27 @@ namespace Unity.MLAgents.Analytics
 
         static bool EnableAnalytics()
         {
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (s_EventRegistered)
             {
                 return true;
             }
 
-#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             AnalyticsResult result = EditorAnalytics.RegisterEventWithLimit(k_EventName, k_MaxEventsPerHour, k_MaxNumberOfElements, k_VendorKey, k_EventVersion);
             if (result == AnalyticsResult.Ok)
             {
                 s_EventRegistered = true;
             }
-            AnalyticsResult result = AnalyticsResult.UnsupportedPlatform;
-            if (result == AnalyticsResult.Ok)
-            {
-                s_EventRegistered = true;
-            }
-#endif
+
             if (s_EventRegistered && s_SentModels == null)
             {
                 s_SentModels = new HashSet<NNModel>();
             }
 
             return s_EventRegistered;
+#else  // no editor, no analytics
+            return false;
+#endif
         }
 
         public static bool IsAnalyticsEnabled()
@@ -289,4 +287,3 @@ namespace Unity.MLAgents.Analytics
         }
     }
 }
-#endif // MLA_UNITY_ANALYTICS_MODULE_ENABLED
