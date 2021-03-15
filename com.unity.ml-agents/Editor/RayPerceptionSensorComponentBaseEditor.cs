@@ -104,7 +104,7 @@ namespace Unity.MLAgents.Editor
 #if MLA_UNITY_PHYSICS_MODULE_ENABLED
             OnRayPerceptionInspectorGUI(true);
 #else
-            EditorGUILayout.HelpBox("Physics2D Module is not currently present.  "+
+            EditorGUILayout.HelpBox("Physics Module is not currently present.  "+
             "Please add it to your project in order to view the inspector for the "+
             $"{nameof(RayPerceptionSensorComponent3D)}", MessageType.Warning);
 #endif
