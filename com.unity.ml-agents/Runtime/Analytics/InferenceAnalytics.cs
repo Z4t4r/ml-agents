@@ -2,7 +2,6 @@
 #define MLA_UNITY_ANALYTICS_MODULE_ENABLED
 #endif
 
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
