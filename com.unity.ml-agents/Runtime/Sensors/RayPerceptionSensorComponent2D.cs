@@ -6,7 +6,6 @@
 #define MLA_UNITY_PHYSICS2D_MODULE_ENABLED
 #endif
 
-#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
 using UnityEngine;
 
 namespace Unity.MLAgents.Sensors
@@ -23,7 +22,11 @@ namespace Unity.MLAgents.Sensors
         public RayPerceptionSensorComponent2D()
         {
             // Set to the 2D defaults (just in case they ever diverge).
+#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
             RayLayerMask = Physics2D.DefaultRaycastLayers;
+#else
+            RayLayerMask = -5;
+#endif
         }
 
         /// <inheritdoc/>
@@ -33,4 +36,3 @@ namespace Unity.MLAgents.Sensors
         }
     }
 }
-#endif // MLA_UNITY_PHYSICS2D_MODULE

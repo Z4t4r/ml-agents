@@ -1,3 +1,11 @@
+#if MLA_UNITY_PHYSICS_MODULE || !UNITY_2019_4_OR_NEWER
+#define MLA_UNITY_PHYSICS_MODULE_ENABLED
+#endif
+
+#if MLA_UNITY_PHYSICS2D_MODULE || !UNITY_2019_4_OR_NEWER
+#define MLA_UNITY_PHYSICS2D_MODULE_ENABLED
+#endif
+
 using UnityEngine;
 using UnityEditor;
 using Unity.MLAgents.Sensors;
@@ -71,27 +79,35 @@ namespace Unity.MLAgents.Editor
         }
     }
 
-#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
     [CustomEditor(typeof(RayPerceptionSensorComponent2D))]
     [CanEditMultipleObjects]
     internal class RayPerceptionSensorComponent2DEditor : RayPerceptionSensorComponentBaseEditor
     {
         public override void OnInspectorGUI()
         {
+#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
             OnRayPerceptionInspectorGUI(false);
+#else
+            EditorGUILayout.HelpBox("Physics2D Module is not currently present.  "+
+            "Please add it to your project in order to view the inspector for the "+
+            $"{nameof(RayPerceptionSensorComponent2D)}", MessageType.Warning);
+#endif
         }
     }
-#endif
 
-#if MLA_UNITY_PHYSICS_MODULE_ENABLED
     [CustomEditor(typeof(RayPerceptionSensorComponent3D))]
     [CanEditMultipleObjects]
     internal class RayPerceptionSensorComponent3DEditor : RayPerceptionSensorComponentBaseEditor
     {
         public override void OnInspectorGUI()
         {
+#if MLA_UNITY_PHYSICS_MODULE_ENABLED
             OnRayPerceptionInspectorGUI(true);
+#else
+            EditorGUILayout.HelpBox("Physics2D Module is not currently present.  "+
+            "Please add it to your project in order to view the inspector for the "+
+            $"{nameof(RayPerceptionSensorComponent3D)}", MessageType.Warning);
+#endif
         }
     }
-#endif
 }
