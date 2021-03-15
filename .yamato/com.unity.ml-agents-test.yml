@@ -14,17 +14,6 @@ test_editors:
       testProject: DevProject
       enableNoDefaultPackages: !!bool true
 
-optional_deps:
-    - name: Analytics
-      project: "OptionalDepedencyTests/NoAnalyticsModule"
-      version: 2019.4
-    - name: Physics
-      project: OptionalDepedencyTests/NoPhysicsModule
-      version: 2019.4
-    - name: Physics2D
-      project: OptionalDepedencyTests/NoPhysics2DModule
-      version: 2019.4
-
 trunk_editor:
     - version: trunk
         # Workaround for MLA-1596 - need to make sure we load the right results.
@@ -159,33 +148,4 @@ test_{{ package.name }}_{{ platform.name }}_trunk:
         cancel_old_ci: true
       {% endfor %}
   {% endfor %}
-  {% endfor %}
-
-  {% for optional_dep in optional_deps %}
-OptionalDependencyTestsLinux_{{ optional_dep.name }}:
-    name : OptionalDependenciesTests_{{ optional_dep.name }}
-    agent:
-        type: Unity::VM
-        image: package-ci/ubuntu:stable
-        flavor: b1.medium
-    commands:
-        - python3 -m pip install unity-downloader-cli --index-url https://artifactory.prd.it.unity3d.com/artifactory/api/pypi/pypi/simple --upgrade
-        - unity-downloader-cli -u trunk -c editor --wait --fast
-        - npm install upm-ci-utils@stable -g --registry https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-npm
-        - upm-ci project test -u {{ optional_dep.version }} --type package-tests --project-path ./{{ optional_dep.project }} --package-filter com.unity.ml-agents
-    artifacts:
-        logs:
-            paths:
-                - "upm-ci~/test-results/**/*"
-    dependencies:
-        - .yamato/com.unity.ml-agents-pack.yml#pack
-    triggers:
-        cancel_old_ci: true
-        expression: |
-            (pull_request.target eq "main" OR
-            pull_request.target match "release.+") AND
-            NOT pull_request.draft AND
-            (pull_request.changes.any match "com.unity.ml-agents/**" OR
-             pull_request.changes.any match " {{ editor.testProject }}/**" OR
-            pull_request.changes.any match ".yamato/com.unity.ml-agents-test.yml")
   {% endfor %}
