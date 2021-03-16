@@ -11,8 +11,8 @@ optional_deps:
 ---
 
   {% for optional_dep in optional_deps %}
-TestOptionalDependencyLinux_{{ optional_dep.name }}:
-    name : LinuxOptionalDependenciesTests_{{ optional_dep.name }}
+OptionalDependencyTests_{{ optional_dep.name }}:
+    name : Test Optional Package Dependencies {{ optional_dep.name }}
     agent:
         type: Unity::VM
         image: package-ci/ubuntu:stable
