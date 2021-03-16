@@ -18,6 +18,22 @@ namespace Unity.MLAgents.Editor
 
         protected void OnRayPerceptionInspectorGUI(bool is3d)
         {
+#if !MLA_UNITY_PHYSICS_MODULE_ENABLED
+            if (is3d)
+            {
+                EditorGUILayout.HelpBox("The Physics Module is not currently present.  "+
+                "Please add it to your project in order to view the inspector for the "+
+                $"{nameof(RayPerceptionSensorComponent3D)}", MessageType.Warning);
+            }
+#endif
+#if !MLA_UNITY_PHYSICS2D_MODULE_ENABLED
+            if (!is3d)
+            {
+                EditorGUILayout.HelpBox("The Physics2D Module is not currently present.  "+
+                "Please add it to your project in order to view the inspector for the "+
+                $"{nameof(RayPerceptionSensorComponent3D)}", MessageType.Warning);
+            }
+#endif
             var so = serializedObject;
             so.Update();
 
@@ -85,13 +101,7 @@ namespace Unity.MLAgents.Editor
     {
         public override void OnInspectorGUI()
         {
-#if MLA_UNITY_PHYSICS2D_MODULE_ENABLED
             OnRayPerceptionInspectorGUI(false);
-#else
-            EditorGUILayout.HelpBox("Physics2D Module is not currently present.  "+
-            "Please add it to your project in order to view the inspector for the "+
-            $"{nameof(RayPerceptionSensorComponent2D)}", MessageType.Warning);
-#endif
         }
     }
 
@@ -101,13 +111,7 @@ namespace Unity.MLAgents.Editor
     {
         public override void OnInspectorGUI()
         {
-#if MLA_UNITY_PHYSICS_MODULE_ENABLED
             OnRayPerceptionInspectorGUI(true);
-#else
-            EditorGUILayout.HelpBox("Physics Module is not currently present.  "+
-            "Please add it to your project in order to view the inspector for the "+
-            $"{nameof(RayPerceptionSensorComponent3D)}", MessageType.Warning);
-#endif
         }
     }
 }

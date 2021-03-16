@@ -49,10 +49,12 @@ namespace Unity.MLAgents.Analytics
         const int k_MaxNumberOfElements = 1000;
 
 
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
         /// <summary>
         /// Models that we've already sent events for.
         /// </summary>
         private static HashSet<NNModel> s_SentModels;
+#endif
 
         static bool EnableAnalytics()
         {
@@ -110,6 +112,7 @@ namespace Unity.MLAgents.Analytics
             IList<IActuator> actuators
         )
         {
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             // The event shouldn't be able to report if this is disabled but if we know we're not going to report
             // Lets early out and not waste time gathering all the data
             if (!IsAnalyticsEnabled())
@@ -129,13 +132,10 @@ namespace Unity.MLAgents.Analytics
             var data = GetEventForModel(nnModel, behaviorName, inferenceDevice, sensors, actionSpec, actuators);
             // Note - to debug, use JsonUtility.ToJson on the event.
             // Debug.Log(JsonUtility.ToJson(data, true));
-#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (AnalyticsUtils.s_SendEditorAnalytics)
             {
                 EditorAnalytics.SendEventWithLimit(k_EventName, data, k_EventVersion);
             }
-#else
-            return;
 #endif
         }
 

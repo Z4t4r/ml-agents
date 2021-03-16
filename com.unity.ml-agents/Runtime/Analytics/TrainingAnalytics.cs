@@ -36,11 +36,6 @@ namespace Unity.MLAgents.Analytics
         };
 
         /// <summary>
-        /// Whether or not we've registered this particular event yet
-        /// </summary>
-        static bool s_EventsRegistered = false;
-
-        /// <summary>
         /// Hourly limit for this event name
         /// </summary>
         const int k_MaxEventsPerHour = 1000;
@@ -51,11 +46,19 @@ namespace Unity.MLAgents.Analytics
         const int k_MaxNumberOfElements = 1000;
 
         private static bool s_SentEnvironmentInitialized;
+
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
+        /// <summary>
+        /// Whether or not we've registered this particular event yet
+        /// </summary>
+        static bool s_EventsRegistered = false;
+
         /// <summary>
         /// Behaviors that we've already sent events for.
         /// </summary>
         private static HashSet<string> s_SentRemotePolicyInitialized;
         private static HashSet<string> s_SentTrainingBehaviorInitialized;
+#endif
 
         private static Guid s_TrainingSessionGuid;
 
@@ -156,6 +159,7 @@ namespace Unity.MLAgents.Analytics
             IList<IActuator> actuators
         )
         {
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (!IsAnalyticsEnabled())
                 return;
 
@@ -177,7 +181,6 @@ namespace Unity.MLAgents.Analytics
             // Debug.Log(
             //     $"Would send event {k_RemotePolicyInitializedEventName} with body {JsonUtility.ToJson(data, true)}"
             // );
-#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (AnalyticsUtils.s_SendEditorAnalytics)
             {
                 EditorAnalytics.SendEventWithLimit(k_RemotePolicyInitializedEventName, data);
@@ -200,6 +203,7 @@ namespace Unity.MLAgents.Analytics
         [Conditional("MLA_UNITY_ANALYTICS_MODULE_ENABLED")]
         public static void TrainingBehaviorInitialized(TrainingBehaviorInitializedEvent tbiEvent)
         {
+#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (!IsAnalyticsEnabled())
                 return;
 
@@ -223,13 +227,10 @@ namespace Unity.MLAgents.Analytics
             // Debug.Log(
             //     $"Would send event {k_TrainingBehaviorInitializedEventName} with body {JsonUtility.ToJson(tbiEvent, true)}"
             // );
-#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (AnalyticsUtils.s_SendEditorAnalytics)
             {
                 EditorAnalytics.SendEventWithLimit(k_TrainingBehaviorInitializedEventName, tbiEvent);
             }
-#else
-            return;
 #endif
         }
 
