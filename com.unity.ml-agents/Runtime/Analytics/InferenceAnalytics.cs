@@ -73,10 +73,10 @@ namespace Unity.MLAgents.Analytics
                 s_SentModels = new HashSet<NNModel>();
             }
 
-            return s_EventRegistered;
 #else  // no editor, no analytics
-            return false;
+            s_EventRegistered = false;
 #endif
+            return s_EventRegistered;
         }
 
         public static bool IsAnalyticsEnabled()
