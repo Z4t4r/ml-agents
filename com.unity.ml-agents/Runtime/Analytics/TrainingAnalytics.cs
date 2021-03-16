@@ -66,7 +66,7 @@ namespace Unity.MLAgents.Analytics
         private static string s_TrainerPackageVersion = "";
         private static string s_TrainerCommunicationVersion = "";
 
-        static bool EnableAnalytics()
+        internal static bool EnableAnalytics()
         {
 #if MLA_UNITY_ANALYTICS_MODULE_ENABLED
             if (s_EventsRegistered)

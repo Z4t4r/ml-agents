@@ -53,7 +53,6 @@ namespace Unity.MLAgents.Tests.Analytics
 
             Assert.AreEqual(2, remotePolicyEvent.ActuatorInfos[0].NumContinuousActions);
             Assert.AreEqual(0, remotePolicyEvent.ActuatorInfos[0].NumDiscreteActions);
-
         }
 
         [Test]
@@ -72,6 +71,12 @@ namespace Unity.MLAgents.Tests.Analytics
             }
 
             Academy.Instance.Dispose();
+        }
+
+        [Test]
+        public void TestEnableAnalytics()
+        {
+            Assert.IsTrue(TrainingAnalytics.EnableAnalytics());
         }
     }
 }

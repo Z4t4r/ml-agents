@@ -60,7 +60,7 @@ namespace Unity.MLAgents.Policies
         /// Trivial implementation of the IList interface that does nothing.
         /// This is only used for "writing" observations that we will discard.
         /// </summary>
-        class NullList : IList<float>
+        internal class NullList : IList<float>
         {
             public IEnumerator<float> GetEnumerator()
             {
@@ -113,7 +113,7 @@ namespace Unity.MLAgents.Policies
             public float this[int index]
             {
                 get { return 0.0f; }
-                set { }
+                set {}
             }
         }
 

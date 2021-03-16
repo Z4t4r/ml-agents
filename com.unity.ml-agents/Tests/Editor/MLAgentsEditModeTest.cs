@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using NUnit.Framework;
 using System.Reflection;
@@ -8,6 +9,7 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Sensors.Reflection;
 using Unity.MLAgents.Policies;
 using Unity.MLAgents.SideChannels;
+using UnityEditor.VersionControl;
 
 namespace Unity.MLAgents.Tests
 {
@@ -28,7 +30,7 @@ namespace Unity.MLAgents.Tests
 
         public ref readonly ActionBuffers DecideAction() { return ref s_EmptyActionBuffers; }
 
-        public void Dispose() { }
+        public void Dispose() {}
     }
 
     public class TestAgent : Agent
@@ -152,7 +154,7 @@ namespace Unity.MLAgents.Tests
             return sensorName;
         }
 
-        public void Update() { }
+        public void Update() {}
 
         public void Reset()
         {
@@ -722,6 +724,44 @@ namespace Unity.MLAgents.Tests
             );
 #pragma warning restore CS0618
         }
+
+        [Test]
+        public void TestNullList()
+        {
+            var nullList = new HeuristicPolicy.NullList();
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                _ = ((IEnumerable<float>)nullList).GetEnumerator();
+            });
+
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                _ = ((IEnumerable)nullList).GetEnumerator();
+            });
+
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                nullList.CopyTo(new[] { 0f }, 0);
+            });
+
+            nullList.Add(0);
+            Assert.IsTrue(nullList.Count == 0);
+
+            nullList.Clear();
+            Assert.IsTrue(nullList.Count == 0);
+
+            nullList.Add(0);
+            Assert.IsFalse(nullList.Contains(0));
+            Assert.IsFalse(nullList.Remove(0));
+            Assert.IsFalse(nullList.IsReadOnly);
+            Assert.IsTrue(nullList.IndexOf(0) == -1);
+            nullList.Insert(0, 0);
+            Assert.IsFalse(nullList.Count > 0);
+            nullList.RemoveAt(0);
+            Assert.IsTrue(nullList.Count == 0);
+            Assert.IsTrue(Mathf.Approximately(0f, nullList[0]));
+            Assert.IsTrue(Mathf.Approximately(0f, nullList[1]));
+        }
     }
 
     [TestFixture]
@@ -810,7 +850,7 @@ namespace Unity.MLAgents.Tests
                 (ObservableAttributeOptions.ExamineAll, 2)
             };
 
-            foreach (var (behavior, expectedNumSensors) in variants)
+            foreach (var(behavior, expectedNumSensors) in variants)
             {
                 var go = new GameObject();
                 var agent = go.AddComponent<DerivedObservableAgent>();

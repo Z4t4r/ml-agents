@@ -87,11 +87,11 @@ namespace Unity.MLAgents
     internal class AgentVectorActuator : VectorActuator
     {
         public AgentVectorActuator(IActionReceiver actionReceiver,
-            IHeuristicProvider heuristicProvider,
-            ActionSpec actionSpec,
-            string name = "VectorActuator"
+                                   IHeuristicProvider heuristicProvider,
+                                   ActionSpec actionSpec,
+                                   string name = "VectorActuator"
         ) : base(actionReceiver, heuristicProvider, actionSpec, name)
-        { }
+        {}
 
         public override BuiltInActuatorType GetBuiltInActuatorType()
         {
@@ -706,9 +706,7 @@ namespace Unity.MLAgents
         /// <param name="reward">The new value of the reward.</param>
         public void SetReward(float reward)
         {
-#if DEBUG
             Utilities.DebugCheckNanAndInfinity(reward, nameof(reward), nameof(SetReward));
-#endif
             m_CumulativeReward += (reward - m_Reward);
             m_Reward = reward;
         }
@@ -736,26 +734,20 @@ namespace Unity.MLAgents
         /// <param name="increment">Incremental reward value.</param>
         public void AddReward(float increment)
         {
-#if DEBUG
             Utilities.DebugCheckNanAndInfinity(increment, nameof(increment), nameof(AddReward));
-#endif
             m_Reward += increment;
             m_CumulativeReward += increment;
         }
 
         internal void SetGroupReward(float reward)
         {
-#if DEBUG
             Utilities.DebugCheckNanAndInfinity(reward, nameof(reward), nameof(SetGroupReward));
-#endif
             m_GroupReward = reward;
         }
 
         internal void AddGroupReward(float increment)
         {
-#if DEBUG
             Utilities.DebugCheckNanAndInfinity(increment, nameof(increment), nameof(AddGroupReward));
-#endif
             m_GroupReward += increment;
         }
 
@@ -889,7 +881,7 @@ namespace Unity.MLAgents
         ///
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
         /// </remarks>
-        public virtual void Initialize() { }
+        public virtual void Initialize() {}
 
         /// <summary>
         /// Implement <see cref="Heuristic"/> to choose an action for this agent using a custom heuristic.
@@ -1336,7 +1328,7 @@ namespace Unity.MLAgents
         /// </summary>
         /// <seealso cref="Initialize"/>
         /// <seealso cref="EndEpisode"/>
-        public virtual void OnEpisodeBegin() { }
+        public virtual void OnEpisodeBegin() {}
 
         /// <summary>
         /// Gets the most recent ActionBuffer for this agent.
