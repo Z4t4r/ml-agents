@@ -30,7 +30,7 @@ namespace Unity.MLAgents.Tests
 
         public ref readonly ActionBuffers DecideAction() { return ref s_EmptyActionBuffers; }
 
-        public void Dispose() {}
+        public void Dispose() { }
     }
 
     public class TestAgent : Agent
@@ -154,7 +154,7 @@ namespace Unity.MLAgents.Tests
             return sensorName;
         }
 
-        public void Update() {}
+        public void Update() { }
 
         public void Reset()
         {
@@ -850,7 +850,7 @@ namespace Unity.MLAgents.Tests
                 (ObservableAttributeOptions.ExamineAll, 2)
             };
 
-            foreach (var(behavior, expectedNumSensors) in variants)
+            foreach (var (behavior, expectedNumSensors) in variants)
             {
                 var go = new GameObject();
                 var agent = go.AddComponent<DerivedObservableAgent>();

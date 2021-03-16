@@ -91,7 +91,7 @@ namespace Unity.MLAgents
                                    ActionSpec actionSpec,
                                    string name = "VectorActuator"
         ) : base(actionReceiver, heuristicProvider, actionSpec, name)
-        {}
+        { }
 
         public override BuiltInActuatorType GetBuiltInActuatorType()
         {
@@ -881,7 +881,7 @@ namespace Unity.MLAgents
         ///
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
         /// </remarks>
-        public virtual void Initialize() {}
+        public virtual void Initialize() { }
 
         /// <summary>
         /// Implement <see cref="Heuristic"/> to choose an action for this agent using a custom heuristic.
@@ -1328,7 +1328,7 @@ namespace Unity.MLAgents
         /// </summary>
         /// <seealso cref="Initialize"/>
         /// <seealso cref="EndEpisode"/>
-        public virtual void OnEpisodeBegin() {}
+        public virtual void OnEpisodeBegin() { }
 
         /// <summary>
         /// Gets the most recent ActionBuffer for this agent.
