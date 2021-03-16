@@ -2,7 +2,6 @@
 #define MLA_UNITY_ANALYTICS_MODULE_ENABLED
 #endif
 
-#if MLA_UNITY_ANALYTICS_MODULE_ENABLED
 using System;
 using UnityEngine;
 
@@ -43,4 +42,3 @@ namespace Unity.MLAgents.Analytics
         }
     }
 }
-#endif // MLA_UNITY_ANALYTICS_MODULE_ENABLED
