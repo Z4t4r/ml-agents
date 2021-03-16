@@ -47,7 +47,7 @@ namespace Unity.MLAgents.Analytics
 
         private static bool s_SentEnvironmentInitialized;
 
-#if UNITY_EDITOR && MLA_UNITY_ANALYTICS_MODULE_ENABLED
+#if MLA_UNITY_ANALYTICS_MODULE_ENABLED
         /// <summary>
         /// Whether or not we've registered this particular event yet
         /// </summary>
