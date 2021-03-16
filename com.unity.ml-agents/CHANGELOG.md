@@ -13,6 +13,8 @@ and this project adheres to
 
 ### Minor Changes
 #### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+- Make com.unity.modules.unityanalytics an optional dependency. (#5109)
+- Make com.unity.modules.physics and com.unity.modules.physics2d optional dependencies. (#5112)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 
 ### Bug Fixes
@@ -32,7 +34,6 @@ and this project adheres to
 ### Minor Changes
 #### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
 - Updated com.unity.barracuda to 1.3.2-preview. (#5084)
-- Make com.unity.modules.unityanalytics an optional dependency. (#5109)
 - Added 3D Ball to the `com.unity.ml-agents` samples. (#5077)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - The `encoding_size` setting for RewardSignals has been deprecated. Please use `network_settings` instead. (#4982)
